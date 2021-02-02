@@ -15,6 +15,8 @@
 
 using namespace std;
 
+/* juste pour faire une test, si je peut faire une " commit " */ 
+
 /**
  * @brief Constructeur de la classe Image. Initialisation de dimx,dimy à 0 et du pointeur tab à NULL.
  * 
