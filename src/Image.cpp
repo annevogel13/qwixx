@@ -282,3 +282,18 @@ void Image::afficherConsole(){
         - Anne: oui je pense que c' est normal. Quand chaque fois que on change quelque chose
                 le code change, et 'ca affecte le .o 
 */
+
+
+/* 
+resultat finale de valgrind 
+FIN==27562== 
+==27562== HEAP SUMMARY:
+==27562==     in use at exit: 0 bytes in 0 blocks
+==27562==   total heap usage: 13 allocs, 13 frees, 118,446 bytes allocated
+==27562== 
+==27562== All heap blocks were freed -- no leaks are possible
+==27562== 
+==27562== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==27562== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+*/ 
