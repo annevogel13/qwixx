@@ -16,7 +16,8 @@
  * 
  * @return Pixel 
  */
-Pixel :: Pixel () : r(0), g(0), b(0) {}
+Pixel :: Pixel () : r(0), g(0), b(0) {} 
+// @Loris je ne comprends pas comment tu fais?? car ca doit pas etre comme Pixel(){ r(0) ... }
 
 
 /**
@@ -32,13 +33,15 @@ Pixel::Pixel(unsigned char nr, unsigned char ng, unsigned char nb){
     if(ng<0) ng=0;
     if(nb<0) nb=0;
 
+    /* je pense qu'on peut mieux faire une assert(0<=nr<=255) */ 
+
     if(nr>255) nr=255;
     if(ng>255) ng=255;
     if(nb>255) nb=255;
     
     r = nr;
     g = ng;
-    b = nb;
+    b = nb;   
 }
 
 /**

@@ -15,7 +15,6 @@
 
 using namespace std;
 
-/* juste pour faire une test, si je peut faire une " commit " */ 
 
 /**
  * @brief Constructeur de la classe Image. Initialisation de dimx,dimy à 0 et du pointeur tab à NULL.
@@ -41,6 +40,15 @@ Image::Image(const int &dimensionX, const int &dimensionY){
     dimy = dimensionY;
     tab = new Pixel[dimensionX*dimensionY];
 }
+// ce doit pas etre une image noire?  je pense que on doit initialiser le tab Pixel avec des pixels noires 
+/* 
+    Pixel P(0,0,0); 
+    for(int i = 0; i <dimx ; i++){
+        for(int j=0; j<dimy ; j++){
+            setPix(i,j,P)
+        }
+    }
+*/ 
 
 /**
  * @brief Destructeur de la classe Image.
@@ -91,7 +99,7 @@ void Image::setPix (const unsigned int &x,const unsigned int &y, const Pixel &co
  */
 void Image::dessinerRectangle (const unsigned int &Xmin,const unsigned int &Ymin, const unsigned int &Xmax,const unsigned int &Ymax, const Pixel &couleur){
     unsigned int i,j;
-    assert(Xmax<dimx); //Pas <= car le pixel 0 compte !!
+    assert(Xmax<dimx); //Pas <= car le pixel 0 compte !! Tu est sure? --> Xmax <=dimx pour la fonction effacer?
     assert(Ymax<dimy);
     assert(Xmin<Xmax);
     assert(Ymin<Ymax);    
@@ -110,7 +118,7 @@ void Image::dessinerRectangle (const unsigned int &Xmin,const unsigned int &Ymin
  * @param couleur 
  */
 void Image::effacer (const Pixel &couleur){
-    dessinerRectangle(0,0,dimx-1,dimy-1,couleur);
+    dessinerRectangle(0,0,dimx-1,dimy-1,couleur);  // pourquoi dimx-1? 
 }
 
 
@@ -266,6 +274,11 @@ void Image::afficherConsole(){
 /*
 //Question :
 - Dans doxygen, faut-il faire un @return void ?
+        - Anne : aucune idee 
 - Dans les ppm, faut il des chiffres où des caractères ?
+        - Anne: chiffres car --> " It stores each pixel with a number from 0 to 65536, 
+                which specifies the color of the pixel
 - Makefile qui refait toujours les .o, est-ce normal ?
+        - Anne: oui je pense que c' est normal. Quand chaque fois que on change quelque chose
+                le code change, et 'ca affecte le .o 
 */
