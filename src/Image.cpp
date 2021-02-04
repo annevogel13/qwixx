@@ -40,7 +40,7 @@ Image::Image(const int &dimensionX, const int &dimensionY){
     dimy = dimensionY;
     tab = new Pixel[dimensionX*dimensionY];
 }
-// ce doit pas etre une image noire?  je pense que on doit initialiser le tab Pixel avec des pixels noires 
+// @p1906860 ce doit pas etre une image noire?  je pense que on doit initialiser le tab Pixel avec des pixels noires 
 /* 
     Pixel P(0,0,0); 
     for(int i = 0; i <dimx ; i++){

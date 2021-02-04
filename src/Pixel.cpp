@@ -33,7 +33,7 @@ Pixel::Pixel(unsigned char nr, unsigned char ng, unsigned char nb){
     if(ng<0) ng=0;
     if(nb<0) nb=0;
 
-    /* je pense qu'on peut mieux faire une assert(0<=nr<=255) */ 
+    /* je pense qu'on peut mieux faire une assert(0<=nr<=255) @p1906860 */ 
 
     if(nr>255) nr=255;
     if(ng>255) ng=255;
