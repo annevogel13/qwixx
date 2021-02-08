@@ -2,11 +2,8 @@
 #define _PIXEL
 
 class Pixel{
-
     private:
-    
         unsigned char r,g,b;
-    
     public:
         //Constructeur par défaut de la classe: initialise le pixel à la couleur noire
         Pixel();

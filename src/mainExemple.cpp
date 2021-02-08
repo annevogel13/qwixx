@@ -8,20 +8,6 @@ int main() {
     Pixel rouge (241, 47, 4);
     Pixel vert (23, 232, 37);
     Pixel noir (0,0,0);
-
-    
-    /*
-    cout<<"Test"<<endl;
-    Image img(5,5);
-    img.effacer(rouge);
-    //img.afficherConsole();
-    img.sauver("./data/img.ppm");
-    img.ouvrir("./data/img.ppm");
-    cout<<"Nouvelle image"<<endl;
-    img.afficherConsole();
-    cout<<"Taille image = "<<(int) sizeof(img);
-    */
-
     
     Image image1 (64,48);    
     image1.effacer(bleu);
@@ -37,6 +23,6 @@ int main() {
     image2.dessinerRectangle(38, 18, 43, 46, noir);
     image2.sauver("./data/image2.ppm");
     
-    std::cout<<std::endl<<"FIN";
+    cout<<(0<=4<=9)<<endl;
     return 0;
 }

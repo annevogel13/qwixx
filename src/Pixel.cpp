@@ -16,12 +16,14 @@
  * 
  * @return Pixel 
  */
-Pixel :: Pixel () : r(0), g(0), b(0) {} 
+Pixel :: Pixel () : r(0), g(0), b(0) {}
 // @Loris je ne comprends pas comment tu fais?? car ca doit pas etre comme Pixel(){ r(0) ... }
+//          Loris : En C++, on a le droit d'utiliser cette syntaxe, c'est plus performant. Je ne peux pas te dire
+//                  pourquoi, mais c'est mieux de faire comme ça.
 
 
 /**
- * @brief Constructeur de la classe Pixel. Initialisation de r,g,b avec ceux les valeurs en paramètre.
+ * @brief Constructeur de la classe Pixel. Initialisation de r,g,b avec les valeurs en paramètre.
  * 
  * @param nr 
  * @param ng 
@@ -32,16 +34,17 @@ Pixel::Pixel(unsigned char nr, unsigned char ng, unsigned char nb){
     if(nr<0) nr=0;
     if(ng<0) ng=0;
     if(nb<0) nb=0;
-
-    /* je pense qu'on peut mieux faire une assert(0<=nr<=255) @p1906860 */ 
-
+    /* Anne : je pense qu'on peut mieux faire une assert(0<=nr<=255) @p1906860
+    Loris : Je me disais que faire des "if" permettait de corriger une erreur au lieu d'arrêter le programme...
+    Mais si vous préférez des asserts, pas de soucis !
+    En revanche assert(0<=nr<=255), ça me parait pas top en informatique. Mieux vaut assert(0<=nr && nr<=255) je crois */
     if(nr>255) nr=255;
     if(ng>255) ng=255;
     if(nb>255) nb=255;
     
     r = nr;
     g = ng;
-    b = nb;   
+    b = nb;
 }
 
 /**

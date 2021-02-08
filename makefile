@@ -1,7 +1,7 @@
-all: exemple.exe
+all: exemple
 
-exemple.exe:	./obj/mainExemple.o ./obj/Image.o ./obj/Pixel.o
-			g++ -g ./obj/mainExemple.o ./obj/Image.o ./obj/Pixel.o -o ./bin/exemple.exe
+exemple: ./obj/mainExemple.o ./obj/Image.o ./obj/Pixel.o
+			g++ -g ./obj/mainExemple.o ./obj/Image.o ./obj/Pixel.o -o ./bin/exemple
 
 ./obj/mainExemple.o: ./src/mainExemple.cpp ./src/Image.h ./src/Pixel.h
 					g++ -g -Wall -c ./src/mainExemple.cpp -o ./obj/mainExemple.o
@@ -11,3 +11,7 @@ exemple.exe:	./obj/mainExemple.o ./obj/Image.o ./obj/Pixel.o
 
 ./obj/Pixel.o: ./src/Pixel.h ./src/Pixel.cpp
 				g++ -g -Wall -c ./src/Pixel.cpp -o ./obj/Pixel.o
+
+clean:
+		rm ./obj/*.o ./bin/*
+

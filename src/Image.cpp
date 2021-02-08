@@ -15,7 +15,6 @@
 
 using namespace std;
 
-
 /**
  * @brief Constructeur de la classe Image. Initialisation de dimx,dimy à 0 et du pointeur tab à NULL.
  * 
@@ -48,6 +47,9 @@ Image::Image(const int &dimensionX, const int &dimensionY){
             setPix(i,j,P)
         }
     }
+
+Loris : De mon point de vu (je suis pas sûr à 100% mais bon) : le constructeur de Pixel iniatilise un pixel noir.
+        Donc un tableau de X pixel initialise X pixel noir, c'est à dire une image noire...
 */ 
 
 /**
@@ -99,7 +101,11 @@ void Image::setPix (const unsigned int &x,const unsigned int &y, const Pixel &co
  */
 void Image::dessinerRectangle (const unsigned int &Xmin,const unsigned int &Ymin, const unsigned int &Xmax,const unsigned int &Ymax, const Pixel &couleur){
     unsigned int i,j;
-    assert(Xmax<dimx); //Pas <= car le pixel 0 compte !! Tu est sure? --> Xmax <=dimx pour la fonction effacer?
+    assert(Xmax<dimx); //Pas <= car le pixel 0 compte !! 
+    /*Tu est sure? --> Xmax <=dimx pour la fonction effacer?
+    Une image de 5 pixel à une dimension de 5 mais occupe les positions tab[0],tab[1],tab[2],tab[3],tab[4].
+    Donc la position maximum est tab[4], Xmax doit valoir 4 au maximum, c'est à dire Xmax<dimx (et pas <=)    
+    */
     assert(Ymax<dimy);
     assert(Xmin<Xmax);
     assert(Ymin<Ymax);    
@@ -118,7 +124,7 @@ void Image::dessinerRectangle (const unsigned int &Xmin,const unsigned int &Ymin
  * @param couleur 
  */
 void Image::effacer (const Pixel &couleur){
-    dessinerRectangle(0,0,dimx-1,dimy-1,couleur);  // pourquoi dimx-1? 
+    dessinerRectangle(0,0,dimx-1,dimy-1,couleur);
 }
 
 
@@ -198,24 +204,19 @@ void Image::testRegression (){
  * 
  * @param filename 
  */
-void Image::sauver(const string & filename) const { //Enlevement de const
-    //cout<<"DEBUT"<<"  "<<filename<<endl;
-    //ofstream fichier(filename.c_str());
+void Image::sauver(const string & filename) const {
     ofstream fichier(filename.c_str());
-    //cout<<"avant test";
     assert(fichier.is_open());
     fichier << "P3" << endl;
     fichier << dimx << " " << dimy << endl;
     fichier << "255" << endl;
 
-    //cout<<"avant boucle";
+    
     for(unsigned int y=0; y<dimy; y++){
         for(unsigned int x=0; x<dimx; x++) {            
             Pixel& pix = getPix(x,y);
-            //cout<<" x= "<<x<<" et y= "<<y;
             fichier << +pix.getRouge() << " " << +pix.getVert() << " " << +pix.getBleu() << " "; //Ajout GETCOULEUR()
         }
-        //cout<<endl; //A enlever
     }
     cout << "Sauvegarde de l'image " << filename << " ... OK\n";
     fichier.close();
@@ -243,7 +244,6 @@ void Image::ouvrir(const string & filename){
     for(unsigned int y=0; y<dimy; y++){
         for(unsigned int x=0; x<dimx; x++) {
             fichier >> r >> g >> b;//rgb et non rbg
-            //cout<<"R brut : "<<r<<" R en int : "<<(unsigned char) r<<endl;
             getPix(x,y).setRouge((unsigned char)r);
             getPix(x,y).setVert((unsigned char)g);
             getPix(x,y).setBleu((unsigned char)b);
@@ -269,31 +269,3 @@ void Image::afficherConsole(){
         cout << endl;
     }
 }
-
-
-/*
-//Question :
-- Dans doxygen, faut-il faire un @return void ?
-        - Anne : aucune idee 
-- Dans les ppm, faut il des chiffres où des caractères ?
-        - Anne: chiffres car --> " It stores each pixel with a number from 0 to 65536, 
-                which specifies the color of the pixel
-- Makefile qui refait toujours les .o, est-ce normal ?
-        - Anne: oui je pense que c' est normal. Quand chaque fois que on change quelque chose
-                le code change, et 'ca affecte le .o 
-*/
-
-
-/* 
-resultat finale de valgrind 
-FIN==27562== 
-==27562== HEAP SUMMARY:
-==27562==     in use at exit: 0 bytes in 0 blocks
-==27562==   total heap usage: 13 allocs, 13 frees, 118,446 bytes allocated
-==27562== 
-==27562== All heap blocks were freed -- no leaks are possible
-==27562== 
-==27562== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==27562== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-
-*/ 

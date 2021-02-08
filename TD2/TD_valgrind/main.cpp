@@ -32,7 +32,12 @@ int main()
 	for(i=MAX;i<2*MAX;++i) 		// 10 = 2* MAX
 	{
 		f2[i-MAX].v = i;  
-		f2[i-MAX].fact = intFactoriel( f1[i-MAX].v );
+		//Anne : f2[i-MAX].fact = intFactoriel( f1[i-MAX].v );
+		//Loris :
+		f2[i-MAX].fact = intFactoriel( f1[i-MAX].v + MAX);
+		/* /!\ : f2 doit contenir les factoriels de 3,4,5. Donc
+		f2[i-MAX].fact = intFactoriel( f1[i-MAX].v + MAX); --> On rajoute +MAX pour retomber sur 3,4,5 au lieu de 0,1,2
+		*/
 		cout << ".";
 	}
 

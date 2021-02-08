@@ -25,7 +25,9 @@ class Image{
         // Accesseur : récupère le pixel original de coordonnées (x,y) en vérifiant leur validité
         // la formule pour passer d'un tab 2D à un tab 1D est tab[y*dimx+x]
         Pixel& getPix (const unsigned int &x, const unsigned int &y) const;
-        // pourquoi tu as mis Pixel& ?  @p1906860
+        //Anne : pourquoi tu as mis Pixel& ?  @p1906860
+        //Loris : Car il ne faut pas renvoyer "une copie" mais le PIXEL original. Donc, on utilise la référence Pixel&.
+        //        J'avais fait la même erreur, mais Mr Pronost en a parlé sur discord.  
 
         // Mutateur : modifie le pixel de coordonnées (x,y)
         void setPix (const unsigned int &x,const unsigned int &y, const Pixel &couleur);
