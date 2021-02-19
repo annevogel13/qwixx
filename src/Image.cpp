@@ -37,20 +37,17 @@ Image::Image(const int &dimensionX, const int &dimensionY){
     assert(dimensionY >= 0);
     dimx = dimensionX;
     dimy = dimensionY;
-    tab = new Pixel[dimensionX*dimensionY];
-}
-// @p1906860 ce doit pas etre une image noire?  je pense que on doit initialiser le tab Pixel avec des pixels noires 
-/* 
-    Pixel P(0,0,0); 
-    for(int i = 0; i <dimx ; i++){
-        for(int j=0; j<dimy ; j++){
-            setPix(i,j,P)
-        }
-    }
+    if(dimensionX==0 && dimensionY==0)
+        tab = NULL;
+    else
+        tab = new Pixel[dimensionX*dimensionY];
 
-Loris : De mon point de vu (je suis pas sûr à 100% mais bon) : le constructeur de Pixel iniatilise un pixel noir.
-        Donc un tableau de X pixel initialise X pixel noir, c'est à dire une image noire...
-*/ 
+    //SDL :
+    
+    surface = NULL;
+    texture = NULL;
+    has_changed = false;
+}
 
 /**
  * @brief Destructeur de la classe Image.
@@ -102,10 +99,6 @@ void Image::setPix (const unsigned int &x,const unsigned int &y, const Pixel &co
 void Image::dessinerRectangle (const unsigned int &Xmin,const unsigned int &Ymin, const unsigned int &Xmax,const unsigned int &Ymax, const Pixel &couleur){
     unsigned int i,j;
     assert(Xmax<dimx); //Pas <= car le pixel 0 compte !! 
-    /*Tu est sure? --> Xmax <=dimx pour la fonction effacer?
-    Une image de 5 pixel à une dimension de 5 mais occupe les positions tab[0],tab[1],tab[2],tab[3],tab[4].
-    Donc la position maximum est tab[4], Xmax doit valoir 4 au maximum, c'est à dire Xmax<dimx (et pas <=)    
-    */
     assert(Ymax<dimy);
     assert(Xmin<Xmax);
     assert(Ymin<Ymax);    
@@ -138,6 +131,12 @@ void Image::testRegression (){
     assert(im.dimx==0);
     assert(im.dimy==0);
     assert(tab==NULL);
+
+    //1_BIS-- Test image à 0
+    Image im3(0,0);
+    assert(im3.dimx==0);
+    assert(im3.dimy==0);
+    assert(im3.tab==NULL);
 
     //2-- Test constructeur avec param
     Image im2(20,30);
@@ -268,4 +267,192 @@ void Image::afficherConsole(){
         }
         cout << endl;
     }
+}
+
+
+//---------------------------------------------
+//--------------POUR SDL-----------------------
+//---------------------------------------------
+/**
+ * @brief Affiche l'image dans une fenêtre SDL2 
+ * 
+ */
+void Image::afficher(){
+    sauver("./data/tmp.ppm");
+    afficherInit();
+    loadFromFile("./data/tmp.ppm",renderer);
+    //cout<<"w= "<<surface->w<<" et h = "<<surface->h<<endl;
+    afficherBoucle();
+    
+
+    //DELETE IMAGE AFFICHER_INIT + DELETE tmp.ppm
+    afficherDetruit();
+    remove("data/tmp.ppm");
+}
+
+void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
+    surface = IMG_Load(filename);
+    if (surface == NULL) {
+        string nfn = string("../") + filename;
+        cout << "Error: cannot load "<< filename <<". Trying "<<nfn<<endl;
+        surface = IMG_Load(nfn.c_str());
+        if (surface == NULL) {
+            nfn = string("../") + nfn;
+            surface = IMG_Load(nfn.c_str());
+        }
+    }
+    if (surface == NULL) {
+        cout<<"Error: cannot load "<< filename <<endl;
+        exit(1);
+    }
+
+    SDL_Surface * surfaceCorrectPixelFormat = SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_ARGB8888,0);
+    SDL_FreeSurface(surface);
+    surface = surfaceCorrectPixelFormat;
+
+    texture = SDL_CreateTextureFromSurface(renderer,surfaceCorrectPixelFormat);
+    if (texture == NULL) {
+        cout << "Error: problem to create the texture of "<< filename<< endl;
+        exit(1);
+    }
+}
+
+void Image::draw (SDL_Renderer * renderer, int x, int y, int w, int h) {
+    int ok;
+    SDL_Rect r;
+    r.x = x;
+    r.y = y;
+    r.w = (w<0)?surface->w:w;
+    r.h = (h<0)?surface->h:h;
+
+    if (has_changed) {
+        ok = SDL_UpdateTexture(texture,NULL,surface->pixels,surface->pitch);
+        assert(ok == 0);
+        has_changed = false;
+    }
+
+    ok = SDL_RenderCopy(renderer,texture,NULL,&r);
+    assert(ok == 0);
+}
+
+void Image::afficherInit()
+{
+    window = nullptr;
+    renderer = nullptr;  
+    //font = nullptr;
+    //Image * image = new Image;
+    //Image * font_im = new Image;
+
+    
+    // Initialisation de la SDL
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        cout << "Erreur lors de l'initialisation de la SDL : " << SDL_GetError() << endl;SDL_Quit();exit(1);
+    }
+
+    if (TTF_Init() != 0) {
+        cout << "Erreur lors de l'initialisation de la SDL_ttf : " << TTF_GetError() << endl;SDL_Quit();exit(1);
+    }
+
+    int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
+    if( !(IMG_Init(imgFlags) & imgFlags)) {
+        cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << endl;SDL_Quit();exit(1);
+    }
+	int dimx, dimy;
+	dimx = 200;
+	dimy = 200;
+
+    // Creation de la fenetre
+    window = SDL_CreateWindow("Module Image", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, dimx, dimy, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    if (window == NULL) {
+        cout << "Erreur lors de la creation de la fenetre : " << SDL_GetError() << endl; SDL_Quit(); exit(1);
+    }
+
+    renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+
+    // IMAGES
+    loadFromFile("data/image1.ppm",renderer);
+
+    /* FONT est inutile pour notre module
+    // FONTS
+    font = TTF_OpenFont("DejaVuSansCondensed.ttf",50);
+    if (font == NULL) {
+            cout << "Failed to load DejaVuSansCondensed.ttf! SDL_TTF Error: " << TTF_GetError() << endl; SDL_Quit(); exit(1);
+	}
+
+    SDL_Color font_color;
+	font_color.r = 50;
+    font_color.g = 50;
+    font_color.b = 255;
+    
+	font_im->setSurface(TTF_RenderText_Solid(font,"Pacman",font_color));
+	font_im->loadFromCurrentSurface(renderer);*/
+    
+}
+
+void Image::afficherBoucle () {
+    SDL_Event events;
+	bool quit = false;
+    int taille_w = 100;
+    int taille_h = 100;
+
+    //Uint32 t = SDL_GetTicks(), nt;
+
+	// tant que ce n'est pas la fin ...
+	while (!quit) {
+
+		// tant qu'il y a des evenements à traiter (cette boucle n'est pas bloquante)
+		while (SDL_PollEvent(&events)) {
+			if (events.type == SDL_QUIT) quit = true;           // Si l'utilisateur a clique sur la croix de fermeture
+			else if (events.type == SDL_KEYDOWN) 
+            {
+				switch (events.key.keysym.scancode) 
+                {
+                    case SDL_SCANCODE_ESCAPE:
+                        quit=true;
+                        break;
+                    case SDL_SCANCODE_T:
+                        // Zoom avant
+                        //cout<<"Zoom avant"<<endl;
+                        taille_w +=20;
+                        taille_h +=20;
+                        break;
+                    case SDL_SCANCODE_G:
+                        // Zoom arrière
+                        //cout<<"Zoom arrière"<<endl;
+                        taille_w -=20;
+                        taille_h -=20;
+                        break;
+                    default: break;
+				}
+			}
+		}
+
+		// on affiche l'image sur le buffer caché
+		//sdlAff();
+
+        //Les 7 lignes suivantes sont égales à la fonction sdlAff() de l'exemple.
+        //Cela évite ici de recréer une fonction...
+        //Remplir l'écran de blanc
+        SDL_SetRenderDrawColor(renderer, 220, 220, 220, 255);
+        SDL_RenderClear(renderer);
+
+	    // Afficher le sprite de Pacman
+        
+        int w;
+        int h;
+        SDL_GetWindowSize(window,&w,&h); //Permet de connaitre les dimensions de la fenêtre
+
+	    draw(renderer,w/2 - taille_w/2,h/2-taille_h/2, taille_w, taille_h); //Positionne l'image au CENTRE !
+
+		// on permute les deux buffers (cette fonction ne doit se faire qu'une seule fois dans la boucle)
+        SDL_RenderPresent(renderer);
+	}
+}
+
+
+void Image::afficherDetruit(){
+    TTF_Quit();
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 }

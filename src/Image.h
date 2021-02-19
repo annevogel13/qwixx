@@ -3,11 +3,22 @@
 
 #include "Pixel.h"
 #include <string>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 class Image{
     private:
         Pixel * tab;
         unsigned int dimx,dimy;
+
+        //SDL
+        SDL_Window * window;
+        SDL_Surface * surface;
+        SDL_Texture * texture;
+        SDL_Renderer * renderer;
+        //TTF_Font *font;
+        bool has_changed;
     
     public:
         // Constructeur par défaut de la classe: initialise dimx et dimy à 0
@@ -49,6 +60,28 @@ class Image{
         void ouvrir(const std::string & filename);
 
         void afficherConsole();
+
+        //----------------------------
+        //-------------SDL------------
+        //----------------------------
+
+        // Affiche l'image dans une fenêtre SDL2
+        void afficher ();
+
+        //Charge une image SDL depuis un fichier
+        void loadFromFile (const char* filename, SDL_Renderer * renderer);
+        
+        //Initialisation  de la fenêtre SDL
+        void afficherInit ();
+
+        //Destructeur de la fenêtre SDL
+        void afficherDetruit ();       
+
+        //Boucle gérant les évenements
+        void afficherBoucle ();
+
+        //Dessine à l'écran
+        void draw (SDL_Renderer * renderer, int x, int y, int w, int h);
 
 };
 
