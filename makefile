@@ -1,8 +1,5 @@
 all: test exemple affichage
 
-simple: simple.cpp
-					g++ -g -o simple simple.cpp -lSDL2 -lSDL2_ttf -lSDL2_image
-
 exemple: obj/mainExemple.o obj/Image.o obj/Pixel.o
 					g++ -g -Wall obj/mainExemple.o obj/Image.o obj/Pixel.o -o bin/exemple  -lSDL2 -lSDL2_ttf -lSDL2_image
 
