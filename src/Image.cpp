@@ -26,6 +26,7 @@ Image::Image(){
     tab = NULL;
 }
 
+
 /**
  * @brief Constructeur de la classe Image avec données passées en paramètre
  * 
@@ -270,9 +271,9 @@ void Image::afficherConsole(){
 }
 
 
-//---------------------------------------------
-//--------------POUR SDL-----------------------
-//---------------------------------------------
+//---------------------------------------------//
+//--------------POUR SDL-----------------------//
+//---------------------------------------------//
 /**
  * @brief Affiche l'image dans une fenêtre SDL2 
  * 
@@ -419,8 +420,13 @@ void Image::afficherBoucle () {
                     case SDL_SCANCODE_G:
                         // Zoom arrière
                         //cout<<"Zoom arrière"<<endl;
-                        taille_w -=20;
-                        taille_h -=20;
+                        if(taille_w > 21 || taille_h > 21){   // taille est de tye int, donc le plus petit image qu' on peut affiche est 1 21-20 = 1 
+                            taille_w -=20;
+                            taille_h -=20;
+                        }else taille_w = taille_h = 21 ;  
+
+                       
+                        
                         break;
                     default: break;
 				}
