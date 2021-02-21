@@ -1,6 +1,6 @@
 /**
  * @file Pixel.cpp
- * @author Loris Mercier
+ * @author AnLoVi
  * @brief Implémentation de la classe Pixel
  * @version 1
  * @date 2021-02-02
@@ -11,24 +11,10 @@
 #include <iostream>
 #include "Pixel.h"
 
-/**
- * @brief Constructeur de la classe Pixel. Mise à zero des trois données r,g,b.
- * 
- * @return Pixel 
- */
+
 Pixel :: Pixel () : r(0), g(0), b(0) {}
-// @Loris je ne comprends pas comment tu fais?? car ca doit pas etre comme Pixel(){ r(0) ... }
-//          Loris : En C++, on a le droit d'utiliser cette syntaxe, c'est plus performant. Je ne peux pas te dire
-//                  pourquoi, mais c'est mieux de faire comme ça.
 
 
-/**
- * @brief Constructeur de la classe Pixel. Initialisation de r,g,b avec les valeurs en paramètre.
- * 
- * @param nr 
- * @param ng 
- * @param nb 
- */
 Pixel::Pixel(unsigned char nr, unsigned char ng, unsigned char nb){
     //Nombre entre 0 et 255
     if(nr<0) nr=0;
@@ -47,60 +33,30 @@ Pixel::Pixel(unsigned char nr, unsigned char ng, unsigned char nb){
     b = nb;
 }
 
-/**
- * @brief Accesseur vers la donnée r
- * 
- * @return unsigned char 
- */
 unsigned char Pixel::getRouge() const{
     return r;
 }
 
-/**
- * @brief Accesseur vers la donnée g
- * 
- * @return unsigned char 
- */
 unsigned char Pixel::getVert() const{
     return g;
 }
 
 
-/**
- * @brief Accesseur vers la donnée b
- * 
- * @return unsigned char 
- */
 unsigned char Pixel::getBleu() const{
     return b;
 }
 
 
-/**
- * @brief Mutateur de la donnée r
- * 
- * @param nr 
- */
 void Pixel::setRouge(unsigned char nr){
     r = nr;
 }
 
 
-/**
- * @brief Mutateur de la donnée g
- * 
- * @param ng 
- */
 void Pixel::setVert(unsigned char ng){
     g = ng;
 }
 
 
-/**
- * @brief Mutateur de la donnée b
- * 
- * @param nb 
- */
 void Pixel::setBleu(unsigned char nb){
     b = nb;
 }

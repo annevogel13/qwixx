@@ -24,66 +24,135 @@ class Image{
         bool has_changed;
     
     public:
-        // Constructeur par défaut de la classe: initialise dimx et dimy à 0
-        // ce constructeur n'alloue pas de pixel
+        /**
+         * @brief Constructeur de la classe Image. Initialisation de dimx,dimy à 0 et du pointeur tab à NULL.
+         * @details N'alloue pas de pixels.
+         * 
+         */
         Image ();
         
-        // Constructeur de la classe: initialise dimx et dimy (après vérification)
-        // puis alloue le tableau de pixel dans le tas (image noire)
+        /**
+         * @brief Constructeur de la classe Image avec données passées en paramètre
+         * 
+         * @param dimensionX 
+         * @param dimensionY 
+         */
         Image (const int &dimensionX, const int &dimensionY);
 
-        // Destructeur de la classe: déallocation de la mémoire du tableau de pixels
-        // et mise à jour des champs dimx et dimy à 0
+        /**
+         * @brief Destructeur de la classe Image.
+         * 
+         */
         ~Image ();
 
-        // Accesseur : récupère le pixel original de coordonnées (x,y) en vérifiant leur validité
-        // la formule pour passer d'un tab 2D à un tab 1D est tab[y*dimx+x]
+        /**
+         * @brief Obtention du pixel de coordonnée (x,y)
+         * 
+         * @param x 
+         * @param y 
+         * @return Pixel& 
+         */        
         Pixel& getPix (const unsigned int &x, const unsigned int &y) const;
-        //Anne : pourquoi tu as mis Pixel& ?  @p1906860
-        //Loris : Car il ne faut pas renvoyer "une copie" mais le PIXEL original. Donc, on utilise la référence Pixel&.
-        //        J'avais fait la même erreur, mais Mr Pronost en a parlé sur discord.  
 
-        // Mutateur : modifie le pixel de coordonnées (x,y)
+        /**
+         * @brief Initialisation du pixel (x,y) à la couleur passée en paramètre.
+         * 
+         * @param x 
+         * @param y 
+         * @param couleur 
+         */
         void setPix (const unsigned int &x,const unsigned int &y, const Pixel &couleur);
 
-        // Dessine un rectangle plein de la couleur dans l'image (en utilisant setPix, indices en paramètre compris)
+        /**
+         * @brief Dessine un rectangle de (Xmin,Ymin) à (Xmax,Ymax) avec la couleur passée en paramètre.
+         * 
+         * @param Xmin 
+         * @param Ymin 
+         * @param Xmax 
+         * @param Ymax 
+         * @param couleur 
+         */
         void dessinerRectangle (const unsigned int &Xmin,const unsigned int &Ymin, const unsigned int &Xmax, const unsigned int &Ymax,const Pixel &couleur);
 
-        // Efface l'image en la remplissant de la couleur en paramètre
-        // (en appelant dessinerRectangle avec le bon rectangle)
+        /**
+         * @brief Efface toute l'image en remplissant avec la couleur passée en paramètre.
+         * 
+         * @param couleur 
+         */
         void effacer (const Pixel &couleur);
 
-        // Effectue une série de tests vérifiant que le module fonctionne et
-        // que les données membres de l'objet sont conformes
+        /**
+         * @brief Test des différentes fonctions de la classe image. (Test constucteur par défaut, constructeur par copie, test des asseceurs/mutateurs, test de dessinerRectangle(), test de effacer())
+         * 
+         */
         void testRegression ();
 
-        //Sauve une image dans un fichier
+        /**
+         * @brief Sauvegarde de l'image dans un fichier au format filename.ppm
+         * 
+         * @param filename 
+         */
         void sauver(const std::string & filename) const;
 
+        /**
+         * @brief Ouverture de l'image filename.ppm
+         * 
+         * @param filename 
+         */
         void ouvrir(const std::string & filename);
 
+        /**
+         * @brief Affiche les pixels de l'image dans la console. 
+         * 
+         */
         void afficherConsole();
 
         //----------------------------
         //-------------SDL------------
         //----------------------------
 
-        // Affiche l'image dans une fenêtre SDL2
+        
+        /**
+         * @brief Affiche l'image dans une fenêtre SDL2 
+         * 
+         */
         void afficher ();
 
-        //Charge une image SDL depuis un fichier
+        /**
+         * @brief Charge un fichier image dans une surface
+         * 
+         * @param filename Chemin de l'image
+         * @param renderer Renderer SDL
+         */
         void loadFromFile (const char* filename, SDL_Renderer * renderer);
         
-        //Initialisation  de la fenêtre SDL
+        /**
+         * @brief Initialise la fenêtre SDL
+         * 
+         */
         void afficherInit ();
 
-        //Destructeur de la fenêtre SDL
+        /**
+         * @brief Détruit la fenêtre SDL
+         * 
+         */
         void afficherDetruit ();       
 
-        //Boucle gérant les évenements
+        /**
+         * @brief Boucle gérant les évenements clavier dans SDL
+         * 
+         */
         void afficherBoucle ();
 
-        //Dessine à l'écran
+        /**
+         * @brief Dessine le renderer à l'écran
+         * 
+         * @param renderer 
+         * @param x Position en x (coin supérieur gauche)
+         * @param y Position en y (coin supérieur gauche)
+         * @param w Largeur du dessin
+         * @param h Hauteyr du dessin
+         */
         void draw (SDL_Renderer * renderer, int x, int y, int w, int h);
 
 };

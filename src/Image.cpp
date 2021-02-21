@@ -1,6 +1,6 @@
 /**
  * @file Image.cpp
- * @author Loris Mercier
+ * @author AnLoVi
  * @brief Implémentation de la classe Image
  * @version 1
  * @date 2021-01-30
@@ -15,11 +15,6 @@
 
 using namespace std;
 
-/**
- * @brief Constructeur de la classe Image. Initialisation de dimx,dimy à 0 et du pointeur tab à NULL.
- * 
- * 
- */
 Image::Image(){
     dimx = 0;
     dimy = 0;
@@ -27,12 +22,6 @@ Image::Image(){
 }
 
 
-/**
- * @brief Constructeur de la classe Image avec données passées en paramètre
- * 
- * @param dimensionX 
- * @param dimensionY 
- */
 Image::Image(const int &dimensionX, const int &dimensionY){
     assert(dimensionX >= 0);
     assert(dimensionY >= 0);
@@ -50,10 +39,6 @@ Image::Image(const int &dimensionX, const int &dimensionY){
     has_changed = false;
 }
 
-/**
- * @brief Destructeur de la classe Image.
- * 
- */
 Image::~Image(){
     dimx = 0;
     dimy = 0;
@@ -63,40 +48,17 @@ Image::~Image(){
     }
 }
 
-/**
- * @brief Obtention du pixel de coordonnée (x,y)
- * 
- * @param x 
- * @param y 
- * @return Pixel& 
- */
 Pixel& Image::getPix (const unsigned int &x, const unsigned int &y) const{
     assert(x<dimx);
     assert(y<dimy);
     return tab[y*dimx+x];
 }
 
-/**
- * @brief Initialisation du pixel (x,y) à la couleur passée en paramètre.
- * 
- * @param x 
- * @param y 
- * @param couleur 
- */
 void Image::setPix (const unsigned int &x,const unsigned int &y, const Pixel &couleur){
     tab[y*dimx+x] = couleur;
 }
 
 
-/**
- * @brief Dessine un rectangle de (Xmin,Ymin) à (Xmax,Ymax) avec la couleur passée en paramètre.
- * 
- * @param Xmin 
- * @param Ymin 
- * @param Xmax 
- * @param Ymax 
- * @param couleur 
- */
 void Image::dessinerRectangle (const unsigned int &Xmin,const unsigned int &Ymin, const unsigned int &Xmax,const unsigned int &Ymax, const Pixel &couleur){
     unsigned int i,j;
     assert(Xmax<dimx); //Pas <= car le pixel 0 compte !! 
@@ -112,20 +74,11 @@ void Image::dessinerRectangle (const unsigned int &Xmin,const unsigned int &Ymin
 }
 
 
-/**
- * @brief Efface toute l'image en remplissant avec la couleur passée en paramètre.
- * 
- * @param couleur 
- */
 void Image::effacer (const Pixel &couleur){
     dessinerRectangle(0,0,dimx-1,dimy-1,couleur);
 }
 
 
-/**
- * @brief Test des différentes fonctions de la classe image. (Test constucteur par défaut, constructeur par copie, test des asseceurs/mutateurs, test de dessinerRectangle(), test de effacer())
- * 
- */
 void Image::testRegression (){
     //1-- Test constructeur d'une image
     Image im;
@@ -199,11 +152,6 @@ void Image::testRegression (){
     }
 }
 
-/**
- * @brief Sauvegarde de l'image dans un fichier au format filename.ppm
- * 
- * @param filename 
- */
 void Image::sauver(const string & filename) const {
     ofstream fichier(filename.c_str());
     assert(fichier.is_open());
@@ -222,11 +170,6 @@ void Image::sauver(const string & filename) const {
     fichier.close();
 }
 
-/**
- * @brief Ouverture de l'image filename.ppm
- * 
- * @param filename 
- */
 void Image::ouvrir(const string & filename){
     ifstream fichier (filename.c_str());
     assert(fichier.is_open());
@@ -255,10 +198,6 @@ void Image::ouvrir(const string & filename){
 
 
 
-/**
- * @brief Affiche les pixels de l'image dans la console. 
- * 
- */
 void Image::afficherConsole(){
     cout << dimx << " " << dimy << endl;
     for(unsigned int y=0; y<dimy; y++) {
@@ -274,10 +213,6 @@ void Image::afficherConsole(){
 //---------------------------------------------//
 //--------------POUR SDL-----------------------//
 //---------------------------------------------//
-/**
- * @brief Affiche l'image dans une fenêtre SDL2 
- * 
- */
 void Image::afficher(){
     sauver("./data/tmp.ppm");
     afficherInit();
@@ -291,12 +226,6 @@ void Image::afficher(){
     remove("data/tmp.ppm");
 }
 
-/**
- * @brief Charge un fichier image dans une surface
- * 
- * @param filename Chemin de l'image
- * @param renderer Renderer SDL
- */
 void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
     surface = IMG_Load(filename);
     if (surface == NULL) {
@@ -324,15 +253,6 @@ void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
     }
 }
 
-/**
- * @brief Dessine le renderer à l'écran
- * 
- * @param renderer 
- * @param x Position en x (coin supérieur gauche)
- * @param y Position en y (coin supérieur gauche)
- * @param w Largeur du dessin
- * @param h Hauteyr du dessin
- */
 void Image::draw (SDL_Renderer * renderer, int x, int y, int w, int h) {
     int ok;
     SDL_Rect r;
@@ -351,10 +271,6 @@ void Image::draw (SDL_Renderer * renderer, int x, int y, int w, int h) {
     assert(ok == 0);
 }
 
-/**
- * @brief Initialise la fenêtre SDL
- * 
- */
 void Image::afficherInit()
 {
     window = nullptr;
@@ -409,10 +325,6 @@ void Image::afficherInit()
     
 }
 
-/**
- * @brief Boucle gérant les évenements clavier dans SDL
- * 
- */
 void Image::afficherBoucle () {
     SDL_Event events;
 	bool quit = false;
@@ -478,10 +390,6 @@ void Image::afficherBoucle () {
 	}
 }
 
-/**
- * @brief Détruit la fenêtre SDL
- * 
- */
 void Image::afficherDetruit(){
     //TTF_Quit();
     SDL_DestroyRenderer(renderer);
