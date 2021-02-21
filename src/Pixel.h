@@ -1,6 +1,10 @@
 #ifndef _PIXEL
 #define _PIXEL
 
+/**
+ * @brief Classe formant un Pixel (r,g,b)
+ * 
+ */
 class Pixel{
     private:
         unsigned char r,g,b;
@@ -12,13 +16,13 @@ class Pixel{
         Pixel(unsigned char nr, unsigned char ng, unsigned char nb);
 
         // Accesseur : récupère la composante rouge du pixel
-        unsigned char getRouge ();
+        unsigned char getRouge () const;
 
         // Accesseur : récupère la composante verte du pixel
-        unsigned char getVert ();
+        unsigned char getVert () const;
 
         // Accesseur : récupère la composante bleue du pixel
-        unsigned char getBleu ();
+        unsigned char getBleu () const;
 
         // Mutateur : modifie la composante rouge du pixel
         void setRouge ( unsigned char nr);

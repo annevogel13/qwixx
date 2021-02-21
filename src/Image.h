@@ -5,8 +5,11 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
 
+/**
+ * @brief Classe gérant l'image à créer/afficher
+ * 
+ */
 class Image{
     private:
         Pixel * tab;

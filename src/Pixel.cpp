@@ -52,7 +52,7 @@ Pixel::Pixel(unsigned char nr, unsigned char ng, unsigned char nb){
  * 
  * @return unsigned char 
  */
-unsigned char Pixel::getRouge(){
+unsigned char Pixel::getRouge() const{
     return r;
 }
 
@@ -61,7 +61,7 @@ unsigned char Pixel::getRouge(){
  * 
  * @return unsigned char 
  */
-unsigned char Pixel::getVert(){
+unsigned char Pixel::getVert() const{
     return g;
 }
 
@@ -71,7 +71,7 @@ unsigned char Pixel::getVert(){
  * 
  * @return unsigned char 
  */
-unsigned char Pixel::getBleu(){
+unsigned char Pixel::getBleu() const{
     return b;
 }
 

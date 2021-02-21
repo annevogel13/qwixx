@@ -291,6 +291,12 @@ void Image::afficher(){
     remove("data/tmp.ppm");
 }
 
+/**
+ * @brief Charge un fichier image dans une surface
+ * 
+ * @param filename Chemin de l'image
+ * @param renderer Renderer SDL
+ */
 void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
     surface = IMG_Load(filename);
     if (surface == NULL) {
@@ -318,6 +324,15 @@ void Image::loadFromFile (const char* filename, SDL_Renderer * renderer) {
     }
 }
 
+/**
+ * @brief Dessine le renderer à l'écran
+ * 
+ * @param renderer 
+ * @param x Position en x (coin supérieur gauche)
+ * @param y Position en y (coin supérieur gauche)
+ * @param w Largeur du dessin
+ * @param h Hauteyr du dessin
+ */
 void Image::draw (SDL_Renderer * renderer, int x, int y, int w, int h) {
     int ok;
     SDL_Rect r;
@@ -336,6 +351,10 @@ void Image::draw (SDL_Renderer * renderer, int x, int y, int w, int h) {
     assert(ok == 0);
 }
 
+/**
+ * @brief Initialise la fenêtre SDL
+ * 
+ */
 void Image::afficherInit()
 {
     window = nullptr;
@@ -349,10 +368,10 @@ void Image::afficherInit()
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         cout << "Erreur lors de l'initialisation de la SDL : " << SDL_GetError() << endl;SDL_Quit();exit(1);
     }
-
+    /*
     if (TTF_Init() != 0) {
         cout << "Erreur lors de l'initialisation de la SDL_ttf : " << TTF_GetError() << endl;SDL_Quit();exit(1);
-    }
+    }*/
 
     int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
     if( !(IMG_Init(imgFlags) & imgFlags)) {
@@ -390,6 +409,10 @@ void Image::afficherInit()
     
 }
 
+/**
+ * @brief Boucle gérant les évenements clavier dans SDL
+ * 
+ */
 void Image::afficherBoucle () {
     SDL_Event events;
 	bool quit = false;
@@ -455,9 +478,12 @@ void Image::afficherBoucle () {
 	}
 }
 
-
+/**
+ * @brief Détruit la fenêtre SDL
+ * 
+ */
 void Image::afficherDetruit(){
-    TTF_Quit();
+    //TTF_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
