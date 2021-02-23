@@ -213,6 +213,7 @@ void Image::afficherConsole(){
 //---------------------------------------------//
 //--------------POUR SDL-----------------------//
 //---------------------------------------------//
+
 void Image::afficher(){
     sauver("./data/tmp.ppm");
     afficherInit();
@@ -348,20 +349,31 @@ void Image::afficherBoucle () {
                         break;
                     case SDL_SCANCODE_T:
                         // Zoom avant
-                        //cout<<"Zoom avant"<<endl;
-                        taille_w +=20;
-                        taille_h +=20;
+                        int height,width;
+                        SDL_GetWindowSize(window, &width,&height);
+                     //   cout<<"width:  "<<width<<endl;
+                     //   cout<<"heigth: "<<height<<endl; 
+                    
+                        if(taille_h < height && taille_w < width ){
+                            taille_h +=10;
+                            taille_w +=10;
+                        }else if(taille_h >= height){
+                                taille_h = height;
+                        }else if (taille_w >= width){
+                                    taille_h = width; 
+                                }
+                          
+                       
                         break;
                     case SDL_SCANCODE_G:
                         // Zoom arrière
                         //cout<<"Zoom arrière"<<endl;
-                        if(taille_w > 21 || taille_h > 21){   // taille est de tye int, donc le plus petit image qu' on peut affiche est 1 21-20 = 1 
-                            taille_w -=20;
-                            taille_h -=20;
-                        }else taille_w = taille_h = 21 ;  
-
-                       
+                        if(taille_w > 11 && taille_h > 11){   // taille est de tye int, donc le plus petit image qu' on peut affiche est 1 11-10 = 1 
+                            taille_w -=10;
+                            taille_h -=10;
+                        }else taille_w = taille_h = 1; 
                         
+
                         break;
                     default: break;
 				}
