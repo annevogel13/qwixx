@@ -17,12 +17,12 @@ L'archive est subdivisée en cinq sous-dossiers et contient aussi un makefile et
 ◼ **README.md**
 
 
-## 2-- COMPILATION ET EXECUTION
+## 2-- COMPILATION ET EXÉCUTION
 
 
 
 
-## 3-- FONCTIONNALITES DES EXECUTABLES
+## 3-- FONCTIONNALITÉS DES EXÉCUTABLES
 
 
 
