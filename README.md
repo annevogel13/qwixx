@@ -1,7 +1,7 @@
 **Anne DEJONG  p1905532  ;  Loris MERCIER  p1906860  ;  Victoire CELLIER  p1804414**
 
 
-Ce Module Image permet de gérer des images. Le code est écrit en C++ et illustre les outils tels que git, doxygen, valgrind que l'on peut être amené à utiliser dans un code. Ce dernier peut se compiler sous Linux, Windows ou avec un IDE comme CodeBlocks ou Visual Studio Code en ligne de commande.
+Ce Module Image permet de gérer des images. Le code est écrit en C++ et illustre les outils tels que git, doxygen, valgrind que l'on peut être amené à utiliser dans un code. Ce dernier peut se compiler sous Linux.
 
 
 ## 1-- ORGANISATION DE L'ARCHIVE
@@ -17,13 +17,12 @@ L'archive est subdivisée en cinq sous-dossiers et contient aussi un makefile et
 
 ## 2-- COMPILATION ET EXÉCUTION
 
-
+A faire
 
 
 ## 3-- FONCTIONNALITÉS DES EXÉCUTABLES
 
-
-
+A faire
 
 
 
