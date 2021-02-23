@@ -1,12 +1,12 @@
-all: test exemple affichage
+all: bin/test bin/exemple bin/affichage
 
-exemple: obj/mainExemple.o obj/Image.o obj/Pixel.o
+bin/exemple: obj/mainExemple.o obj/Image.o obj/Pixel.o
 					g++ -g -Wall obj/mainExemple.o obj/Image.o obj/Pixel.o -o bin/exemple  -lSDL2 -lSDL2_ttf -lSDL2_image
 
-affichage: obj/mainAffichage.o obj/Image.o obj/Pixel.o
+bin/affichage: obj/mainAffichage.o obj/Image.o obj/Pixel.o
 					g++ -g -Wall obj/mainAffichage.o obj/Image.o obj/Pixel.o -o bin/affichage -lSDL2 -lSDL2_ttf -lSDL2_image
 
-test: obj/mainTest.o obj/Image.o obj/Pixel.o 
+bin/test: obj/mainTest.o obj/Image.o obj/Pixel.o 
 					g++ -g -Wall obj/mainTest.o obj/Image.o obj/Pixel.o -o bin/test -lSDL2 -lSDL2_ttf -lSDL2_image
 
 obj/mainTest.o: src/mainTest.cpp src/Image.h src/Pixel.h
