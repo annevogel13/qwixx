@@ -8,13 +8,13 @@ Ce Module Image permet de gérer des images. Le code est écrit en C++ et illust
 
 ## 1-- ORGANISATION DE L'ARCHIVE
 L'archive est subdivisée en cinq sous-dossiers et contient aussi un makefile et un fichier texte.
-◼ **bin** qui correspond au répertoire où les exécutables sont compilés
-◼ **data** qui contient les assets (images) utilisées par le module
-◼ **doc** qui contient le fichier doxygen qui permet de générer la documentation du code
-◼ **obj** qui correspond au répertoire où il y a les compilations intermédiaires (.o)
-◼ **src** qui contient les classes s'occupant de faire tourner le module image et de l'afficher
-◼ **makefile**
-◼ **README.md**
+- ◼ **bin** qui correspond au répertoire où les exécutables sont compilés
+- ◼ **data** qui contient les assets (images) utilisées par le module
+- ◼ **doc** qui contient le fichier doxygen qui permet de générer la documentation du code
+- ◼ **obj** qui correspond au répertoire où il y a les compilations intermédiaires (.o)
+- ◼ **src** qui contient les classes s'occupant de faire tourner le module image et de l'afficher
+- ◼ **makefile**
+- ◼ **README.md**
 
 
 ## 2-- COMPILATION ET EXÉCUTION
@@ -23,6 +23,8 @@ L'archive est subdivisée en cinq sous-dossiers et contient aussi un makefile et
 
 
 ## 3-- FONCTIONNALITÉS DES EXÉCUTABLES
+
+
 
 
 
