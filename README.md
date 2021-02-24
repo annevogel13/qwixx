@@ -1,7 +1,7 @@
 **Anne DEJONG  p1905532  ;  Loris MERCIER  p1906860  ;  Victoire CELLIER  p1804414**
 
 
-Ce Module Image permet de créer, modifier des images. Le code est écrit en C++ et peut se compiler sous Linux.
+Ce Module Image permet de gérer des images. Le code est écrit en C++ et peut se compiler sous Linux.
 
 
 ## 1-- ORGANISATION DE L'ARCHIVE
