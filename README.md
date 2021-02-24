@@ -18,18 +18,18 @@ L'archive est subdivisée en cinq sous-dossiers accompagnée d'un makefile et d'
 ## 2-- COMPILATION ET EXÉCUTION
 
 ### A] Compilation
-Pour compiler ce Module Image et obtenir 3 fichiers executable de demonstration, il est nécessaire d'utiliser la commande **```make```** afin de créer mainExemple, mainTest et mainAffichage. Vous pouvez également cibler un des 3 programmes avec **```make nom_du_main```**
+Pour compiler ce Module Image et obtenir 3 fichiers executables de démonstration, il est nécessaire d'utiliser la commande **```make```** afin de créer mainExemple, mainTest et mainAffichage. Vous pouvez également cibler un des 3 programmes avec **```make nom_du_main```**
 Cette commande fait appel au makefile présent dans notre archive.
 
 ### B] Exécution
-Lors de l'exécution, vous pouvez utiliser trois différentes commandes, toutes trois exécuteront un programme C++ différent.
-- **mainTest.cpp** : pour l'exécuter, utilisez la commande **```bin/test```**.
+Pour executer un des trois programmes compilés (voir section ci-dessus), veuillez suivre ces commandes :
+- **mainTest.cpp** : utilisez la commande **```bin/test```**.
 - **mainAffichage.cpp**, utilisez la commande **```bin/affichage```**.
 - **mainExemple.cpp**, utilisez la commande **```bin/exemple```**.
 
 
 ## 3-- FONCTIONNALITÉS DES EXÉCUTABLES
 Chaque exécutable gère une fonctionnalité différente dans le Module Image.
-- **mainTest.cpp** gère la création d'une image puis exécute la fonction TestRegression sur l'image créée.
-- **mainAffichage.cpp** gère la création d'une image et l'affiche dans une fenêtre SDL2.
-- **mainExemple.cpp** gère la création d'une image composée de pixels et l'enregistre dans un fichier. Elle ajoute ensuite deux rectangles sur cette image puis l'enregistre dans un nouveau fichier en tant que nouvelle image.
+- **mainTest.cpp** crée une image puis exécute la fonction TestRegression() afin de s'assurer que le module fonctionne.
+- **mainAffichage.cpp** crée une image et l'affiche dans une fenêtre SDL2.
+- **mainExemple.cpp** crée deux images et les enregistre dans un fichier de format .ppm.
