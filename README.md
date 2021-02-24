@@ -18,14 +18,14 @@ L'archive est subdivisée en cinq sous-dossiers et contient aussi un makefile et
 ## 2-- COMPILATION ET EXÉCUTION
 
 ### A] Compilation
-Pour compiler ce Module Image, il est nécessaire d'utiliser la commande ```**make**```.
+Pour compiler ce Module Image, il est nécessaire d'utiliser la commande **```make```**.
 Elle fait appel au makefile présent dans notre archive.
 
 ### B] Exécution
 Lors de l'exécution, vous pouvez utiliser trois différentes commandes, toutes trois exécuteront un programme C++ différent.
 - **mainTest.cpp** : pour l'exécuter, utilisez la commande **```bin/test```**.
-- **mainAffichage.cpp**, utilisez la commande ```bin/affichage```.
-- **mainExemple.cpp**, utilisez la commande ```bin/exemple```.
+- **mainAffichage.cpp**, utilisez la commande **```bin/affichage```**.
+- **mainExemple.cpp**, utilisez la commande **```bin/exemple```**.
 
 
 ## 3-- FONCTIONNALITÉS DES EXÉCUTABLES
