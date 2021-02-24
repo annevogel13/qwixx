@@ -18,14 +18,14 @@ L'archive est subdivisée en cinq sous-dossiers accompagnée d'un makefile et d'
 ## 2-- COMPILATION ET EXÉCUTION
 
 ### A] Compilation
-Pour compiler ce Module Image et obtenir 3 fichiers executables de démonstration, il est nécessaire d'utiliser la commande **```make```** afin de créer mainExemple, mainTest et mainAffichage. Vous pouvez également cibler un des 3 programmes avec **```make nom_du_main```**
+Pour compiler ce Module Image et obtenir 3 fichiers exécutables de démonstration, il est nécessaire d'utiliser la commande **```make```** afin de créer mainExemple, mainTest et mainAffichage. Vous pouvez également cibler un des 3 programmes avec **```make nom_du_main```**
 Cette commande fait appel au makefile présent dans notre archive.
 
 ### B] Exécution
-Pour executer un des trois programmes compilés (voir section ci-dessus), veuillez suivre ces commandes :
+Pour exécuter un des trois programmes compilés (voir section ci-dessus), veuillez suivre ces commandes :
 - **mainTest.cpp** : utilisez la commande **```bin/test```**.
-- **mainAffichage.cpp**, utilisez la commande **```bin/affichage```**.
-- **mainExemple.cpp**, utilisez la commande **```bin/exemple```**.
+- **mainAffichage.cpp** : utilisez la commande **```bin/affichage```**.
+- **mainExemple.cpp** : utilisez la commande **```bin/exemple```**.
 
 
 ## 3-- FONCTIONNALITÉS DES EXÉCUTABLES
