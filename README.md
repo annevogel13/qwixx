@@ -29,10 +29,7 @@ Lors de l'exécution, vous pouvez utiliser trois différentes commandes, toutes 
 
 
 ## 3-- FONCTIONNALITÉS DES EXÉCUTABLES
-
-A faire
-
-
-
-
-
+Chaque exécutable gère une fonctionnalité différente dans le Module Image.
+- **mainTest.cpp** gère la création d'une image puis exécute la fonction TestRegression sur l'image créée.
+- **mainAffichage.cpp** gère la création d'une image et l'affiche dans une fenêtre SDL2.
+- **mainExemple.cpp** gère la création d'une image composée de pixels et l'enregistre dans un fichier. Elle ajoute ensuite deux rectangles sur cette image puis l'enregistre dans un nouveau fichier en tant que nouvelle image.
