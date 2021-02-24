@@ -21,7 +21,7 @@ class Image{
         SDL_Texture * texture;
         SDL_Renderer * renderer;
         //TTF_Font *font;
-        bool has_changed;
+       bool has_changed;
     
     public:
         /**
